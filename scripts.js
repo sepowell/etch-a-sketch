@@ -12,12 +12,33 @@ function createGrid() {
   }
 }
 
-// loads grid into grid container
+// Loads grid into grid container on page load
 document.body.onload = createGrid();
 
-//recognizes mouse over on all inner div's
+// Links users choice buttons
+const normalChoice = document.getElementById("normal");
+const psychadelicChoice = document.getElementById("psychadelic");
+var userChoice = "normal";
+normalChoice.addEventListener("click", () => {
+  userChoice = "normal";
+  console.log(userChoice);
+})
+psychadelicChoice.addEventListener("click", () => {
+  userChoice = "psychadelic";
+  console.log(userChoice);
+})
+
+// Recognizes mouseover event on all inner div's
 document.querySelectorAll(".inner-div").forEach(item => {
   item.addEventListener("mouseover", () => {
-  console.log("omg");
+    colorChange();
   });
 });
+
+function colorChange() {
+  if (userChoice === "normal") {
+    console.log("change color normally")
+  } else {
+    console.log("change color colorfully")
+  }
+}

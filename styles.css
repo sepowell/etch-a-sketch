@@ -3,6 +3,11 @@
   padding: 0;
 }
 
+.choice-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
 .grid-container {
   display: grid;
   grid-template-columns: repeat(16, 1fr);
