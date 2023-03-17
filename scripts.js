@@ -1,10 +1,9 @@
-
 // Establish grid container
 const gridContainer = document.createElement("div");
-gridContainer.classList.add("grid-container");
+gridContainer.classList.add("normal-grid-container");
 document.body.appendChild(gridContainer);
 
-function createGrid() {
+function createNormalGrid() {
   for (let i = 0; i < 256; i++) {
     const createDiv = document.createElement("div")
     createDiv.classList.add("inner-div");
@@ -13,7 +12,7 @@ function createGrid() {
 }
 
 // Loads grid into grid container on page load
-document.body.onload = createGrid();
+document.body.onload = createNormalGrid();
 
 // Links users choice buttons
 const normalChoice = document.getElementById("normal");
@@ -28,17 +27,51 @@ psychadelicChoice.addEventListener("click", () => {
   console.log(userChoice);
 })
 
-// Recognizes mouseover event on all inner div's
+// // Changes grid based on user choice
+// const gridChoiceNormal = document.getElementById("normal-grid");
+// const gridChoiceBig = document.getElementById("big-grid");
+// var gridChoice = "";
+// gridChoiceNormal.addEventListener("click", () => {
+//   gridChoice = "normal";
+//   changeGrid();
+// });
+// gridChoiceBig.addEventListener("click", () => {
+//   gridChoice = "big";
+//   changeGrid();
+// });
+
+// function changeGrid() {
+//   document.querySelectorAll(".inner-div").forEach(item => {
+//     item.remove();
+//   });
+//   if (gridChoice === "normal") {
+//     createNormalGrid();
+//   } else {
+//     createBigGrid();
+//   }
+// }
+
+// Recognizes mouseover event on all inner div's and colors
+// div based on user choice
 document.querySelectorAll(".inner-div").forEach(item => {
-  item.addEventListener("mouseover", () => {
-    colorChange();
+  item.addEventListener("mouseover", (e) => {
+    if (userChoice === "normal") {
+      e.target.style.backgroundColor = '#707070';
+    } else {
+      const psychadelicPallete = ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet'];
+      const randomColor = Math.floor(Math.random() * psychadelicPallete.length);
+      e.target.style.backgroundColor = psychadelicPallete[randomColor];
+    }
   });
 });
 
-function colorChange() {
-  if (userChoice === "normal") {
-    console.log("change color normally")
-  } else {
-    console.log("change color colorfully")
-  }
+// Erases grid
+const eraseGrid = document.getElementById("erase");
+eraseGrid.addEventListener("click", erase);
+
+function erase() {
+  document.querySelectorAll(".inner-div").forEach(item => {
+  const gridItem = item;
+  gridItem.style.backgroundColor = "white";
+  });
 }
